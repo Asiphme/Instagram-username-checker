@@ -1,0 +1,7 @@
+.github
+Dockerfile
+venv/
+__pycashe__/
+output/
+.env
+logs/

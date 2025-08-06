@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loyiha Hisoboti - Instagram Checker</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background-color: #f4f7f6; color: #333; }
+        .container { max-width: 800px; margin: 20px auto; background-color: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .summary { display: flex; justify-content: space-around; text-align: center; margin-top: 20px; }
+        .summary-item { padding: 15px; background-color: #ecf0f1; border-radius: 8px; flex-basis: 30%; }
+        .summary-item h3 { margin: 0; font-size: 1.2em; color: #2c3e50; }
+        .summary-item p { margin: 5px 0 0; font-size: 1.5em; font-weight: bold; }
+        .details { margin-top: 30px; border-top: 2px solid #3498db; padding-top: 20px; }
+        .details h2 { color: #34495e; }
+        ul { list-style: none; padding: 0; }
+        li { background-color: #ecf0f1; padding: 10px; margin-bottom: 8px; border-radius: 6px; display: flex; justify-content: space-between; }
+        .status-available { color: #27ae60; font-weight: bold; }
+        .status-taken { color: #e74c3c; font-weight: bold; }
+        .status-error { color: #f39c12; font-weight: bold; }
+        .status-unknown { color: #7f8c8d; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Instagram Checker Loyihasi Hisoboti</h1>
+
+        <div class="summary">
+            <div class="summary-item">
+                <h3>Tekshirilgan</h3>
+                <p>{{ total_checked }}</p>
+            </div>
+            <div class="summary-item">
+                <h3>Mavjud</h3>
+                <p>{{ available_count }}</p>
+            </div>
+            <div class="summary-item">
+                <h3>Band</h3>
+                <p>{{ taken_count }}</p>
+            </div>
+        </div>
+
+        <div class="details">
+            <h2>Hisobot Tafsilotlari</h2>
+            <ul>
+                <li><strong>Ishga tushgan vaqt:</strong> <span>{{ start_time }}</span></li>
+                <li><strong>Yakunlangan vaqt:</strong> <span>{{ end_time }}</span></li>
+                <li><strong>Davomiyligi:</strong> <span>{{ duration_seconds | round(2) }} soniya</span></li>
+                <li><strong>Tezlik:</strong> <span>{{ performance_usernames_per_second | round(2) }} username/sekund</span></li>
+            </ul>
+        </div>
+        
+        <div class="details">
+            <h2>Yakuniy natijalar</h2>
+            {% if results %}
+            <ul>
+                {% for result in results %}
+                <li>
+                    <span>{{ result.username }}</span>
+                    <span class="status-{{ result.status }}">{{ result.status }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>Natijalar mavjud emas.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
